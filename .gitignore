@@ -1,0 +1,12 @@
+.idea/
+.DS_Store
+*/**/*un~
+.vagrant/
+*.pyc
+build/
+pyetchash.egg-info/
+*.so
+*~
+*.swp
+MANIFEST
+dist/
