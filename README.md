@@ -1,31 +1,43 @@
-### Deprecated
+# go-etchash
 
-Superseded by https://github.com/etclabscore/go-etchash
+Etchash go module intended for use by core-pool (and open-ethereum-pool).
 
-# Etchash
+* for core-pool see https://github.com/etclabscore/open-etc-pool
+* for more information on etchash see https://github.com/eth-classic/etchash
+* supports etchash, ethash & ubqhash
 
-Etchash is a modified version of ethash, recalibrated via ECIP-1099:
-https://github.com/ethereumclassic/ECIPs/blob/master/_specs/ecip-1099.md
+### usage (etchash)
 
-For details on etchash, please see the Ethereum wiki:
-https://github.com/ethereum/wiki/wiki/Ethash
+```go
+var ecip1099FBlockClassic uint64 = 11700000 // classic mainnet
+var ecip1099FBlockMordor uint64 = 2520000 // mordor testnet
 
-### Notes
+var hasher = etchash.New(&ecip1099FBlockMordor, nil)
 
-ubuntu:
-`apt-get install libboost-all-dev`
+if hasher.Verify(block) {
+    ...
+}
+```
 
-### Coding Style for C++ code:
+### usage (ethash)
 
-Follow the same exact style as in [cpp-ethereum](https://github.com/ethereum/aleth/blob/master/CODING_STYLE.md)
+```go
+var hasher = etchash.New(nil, nil)
 
-### Coding Style for C code:
+if hasher.Verify(block) {
+    ...
+}
+```
 
-The main thing above all is code consistency.
+### usage (ubqhash)
 
-- Tabs for indentation. A tab is 4 spaces
-- Try to stick to the [K&R](http://en.wikipedia.org/wiki/Indent_style#K.26R_style),
-  especially for the C code.
-- Keep the line lengths reasonable. No hard limit on 80 characters but don't go further
-  than 110. Some people work with multiple buffers next to each other.
-  Make them like you :)
+```go
+var uip1FEpoch uint64 = 22 // ubiq mainnet
+
+var hasher = etchash.New(nil, &uip1FEpoch)
+
+if hasher.Verify(block) {
+    ...
+}
+```
+
