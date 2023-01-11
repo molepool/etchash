@@ -1,4 +1,4 @@
-// Copyright 2017 The go-ethereum Authors
+// Copyright 2015 The go-ethereum Authors
 // This file is part of the go-ethereum library.
 //
 // The go-ethereum library is free software: you can redistribute it and/or modify
@@ -14,18 +14,20 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
 
-package ethash
+package secp256k1
 
-import (
-	"math/big"
+import "C"
+import "unsafe"
 
-	"github.com/ethereum/go-ethereum/common"
-)
+// Callbacks for converting libsecp256k1 internal faults into
+// recoverable Go panics.
 
-type Block interface {
-	Difficulty() *big.Int
-	HashNoNonce() common.Hash
-	Nonce() uint64
-	MixDigest() common.Hash
-	NumberU64() uint64
+//export secp256k1GoPanicIllegal
+func secp256k1GoPanicIllegal(msg *C.char, data unsafe.Pointer) {
+	panic("illegal argument: " + C.GoString(msg))
+}
+
+//export secp256k1GoPanicError
+func secp256k1GoPanicError(msg *C.char, data unsafe.Pointer) {
+	panic("internal error: " + C.GoString(msg))
 }

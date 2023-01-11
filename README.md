@@ -1,43 +1,22 @@
-# go-etchash
+[![Build Status](https://travis-ci.org/ethereum/ethash.svg?branch=master)](https://travis-ci.org/ethereum/ethash)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/debris/ethash?branch=master&svg=true)](https://ci.appveyor.com/project/debris/ethash-nr37r/branch/master)
 
-Etchash go module intended for use by core-pool (and open-ethereum-pool).
+# Ethash
 
-* for core-pool see https://github.com/etclabscore/open-etc-pool
-* for more information on etchash see https://github.com/eth-classic/etchash
-* supports etchash, ethash & ubqhash
+For details on this project, please see the Ethereum wiki:
+https://github.com/ethereum/wiki/wiki/Ethash
 
-### usage (etchash)
+### Coding Style for C++ code:
 
-```go
-var ecip1099FBlockClassic uint64 = 11700000 // classic mainnet
-var ecip1099FBlockMordor uint64 = 2520000 // mordor testnet
+Follow the same exact style as in [cpp-ethereum](https://github.com/ethereum/cpp-ethereum/blob/develop/CodingStandards.txt)
 
-var hasher = etchash.New(&ecip1099FBlockMordor, nil)
+### Coding Style for C code:
 
-if hasher.Verify(block) {
-    ...
-}
-```
+The main thing above all is code consistency.
 
-### usage (ethash)
-
-```go
-var hasher = etchash.New(nil, nil)
-
-if hasher.Verify(block) {
-    ...
-}
-```
-
-### usage (ubqhash)
-
-```go
-var uip1FEpoch uint64 = 22 // ubiq mainnet
-
-var hasher = etchash.New(nil, &uip1FEpoch)
-
-if hasher.Verify(block) {
-    ...
-}
-```
-
+- Tabs for indentation. A tab is 4 spaces
+- Try to stick to the [K&R](http://en.wikipedia.org/wiki/Indent_style#K.26R_style),
+  especially for the C code.
+- Keep the line lengths reasonable. No hard limit on 80 characters but don't go further
+  than 110. Some people work with multiple buffers next to each other.
+  Make them like you :)
